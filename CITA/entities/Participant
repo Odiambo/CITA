@@ -1,0 +1,255 @@
+{
+  "name": "Participant",
+  "type": "object",
+  "properties": {
+    "first_name": {
+      "type": "string",
+      "description": "Participant's first name"
+    },
+    "last_name": {
+      "type": "string",
+      "description": "Participant's last name"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email address"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Phone number"
+    },
+    "date_of_birth": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of birth"
+    },
+    "address": {
+      "type": "string",
+      "description": "Home address"
+    },
+    "zip": {
+      "type": "string",
+      "description": "Zip code"
+    },
+    "education": {
+      "type": "string",
+      "enum": [
+        "High School",
+        "Trades/Licensed",
+        "Associates",
+        "Undergrad",
+        "Graduate+"
+      ],
+      "description": "Highest education level"
+    },
+    "stage": {
+      "type": "string",
+      "enum": [
+        "initial_inquiry",
+        "screening",
+        "full_application",
+        "assessment",
+        "approval_denial",
+        "enrollment"
+      ],
+      "default": "initial_inquiry",
+      "description": "Current stage in the intake pipeline"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "approved",
+        "denied",
+        "withdrawn",
+        "on_hold"
+      ],
+      "default": "active",
+      "description": "Overall status"
+    },
+    "referral_source": {
+      "type": "string",
+      "enum": [
+        "self",
+        "agency",
+        "community",
+        "healthcare",
+        "legal",
+        "other"
+      ],
+      "description": "How the participant was referred"
+    },
+    "program_interest": {
+      "type": "string",
+      "description": "Program or service of interest"
+    },
+    "screening_notes": {
+      "type": "string",
+      "description": "Notes from screening stage"
+    },
+    "screening_eligible": {
+      "type": "boolean",
+      "description": "Whether participant passed screening"
+    },
+    "household_size": {
+      "type": "number",
+      "description": "Number of people in household"
+    },
+    "income_level": {
+      "type": "string",
+      "enum": [
+        "below_poverty",
+        "low_income",
+        "moderate_income",
+        "above_moderate"
+      ],
+      "description": "Income bracket"
+    },
+    "employment_status": {
+      "type": "string",
+      "enum": [
+        "employed",
+        "unemployed",
+        "part_time",
+        "self_employed",
+        "retired",
+        "disabled"
+      ],
+      "description": "Current employment status"
+    },
+    "assessment_score": {
+      "type": "number",
+      "description": "Needs assessment score"
+    },
+    "assessment_notes": {
+      "type": "string",
+      "description": "Notes from assessment"
+    },
+    "priority_level": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "urgent"
+      ],
+      "description": "Priority level based on assessment"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "denied"
+      ],
+      "default": "pending",
+      "description": "Approval decision"
+    },
+    "decision_notes": {
+      "type": "string",
+      "description": "Notes on approval/denial decision"
+    },
+    "decision_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date decision was made"
+    },
+    "assigned_caseworker": {
+      "type": "string",
+      "description": "Email of assigned caseworker"
+    },
+    "enrollment_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date enrolled in program"
+    },
+    "notes": {
+      "type": "string",
+      "description": "General notes and comments"
+    },
+    "documents": {
+      "type": "array",
+      "description": "Uploaded document URLs",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "uploaded_date": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "first_name",
+    "last_name",
+    "email",
+    "stage"
+  ],
+  "rls": {
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": {
+              "$in": [
+                "admin",
+                "intake_admin",
+                "program_director",
+                "exec_director",
+                "caseworker",
+                "viewer"
+              ]
+            }
+          }
+        },
+        {
+          "data.email": "{{user.email}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": {
+              "$in": [
+                "admin",
+                "intake_admin",
+                "program_director",
+                "exec_director",
+                "caseworker"
+              ]
+            }
+          }
+        },
+        {
+          "data.email": "{{user.email}}",
+          "user_condition": {
+            "role": "participant"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": {
+          "$in": [
+            "admin",
+            "intake_admin",
+            "exec_director"
+          ]
+        }
+      }
+    }
+  }
+}
