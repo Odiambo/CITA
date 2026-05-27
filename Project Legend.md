@@ -1,6 +1,6 @@
 ## CITA Project Legend
 
-## Project Structure
+### Project Structure
 The entities/ directory contains the core project files and configuration for the CITA application.
 ---
 ```
