@@ -1,17 +1,17 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Mail, Phone, MapPin } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import StageBadge from '../shared/StageBadge';
 import StatusBadge from '../shared/StatusBadge';
 
 export default function ParticipantHeader({ participant }) {
-  const navigate = useNavigate();
+  const router = useRouter();
   const p = participant;
 
   return (
     <div className="space-y-4">
-      <Button variant="ghost" size="sm" onClick={() => navigate(-1)} className="gap-1.5 text-muted-foreground">
+      <Button variant="ghost" size="sm" onClick={() => router.back()} className="gap-1.5 text-muted-foreground">
         <ArrowLeft className="w-3.5 h-3.5" /> Back
       </Button>
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">

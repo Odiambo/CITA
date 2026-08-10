@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Card } from '@/components/ui/card';
 import StageBadge from '../shared/StageBadge';
 import { format } from 'date-fns';
@@ -19,7 +19,7 @@ export default function RecentActivity({ participants }) {
         {recent.map(p => (
           <Link
             key={p.id}
-            to={`/participants/${p.id}`}
+            href={`/participants/${p.id}`}
             className="flex items-center justify-between px-5 py-3 hover:bg-muted/50 transition-colors group"
           >
             <div className="flex items-center gap-3 min-w-0">

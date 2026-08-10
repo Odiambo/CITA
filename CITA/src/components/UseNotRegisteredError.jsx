@@ -1,6 +1,8 @@
+'use client';
+
 import React from 'react';
 
-import { base44 } from '@/api/base44Client';
+import { cita } from '@/api/citaClient';
 import { useState } from 'react';
 
 const UserNotRegisteredError = () => {
@@ -12,20 +14,12 @@ const UserNotRegisteredError = () => {
     setRegistering(true);
     setError('');
     try {
-      // Register the current logged-in user as a participant role
-      await base44.users.inviteUser(undefined, 'participant');
+      await cita.auth.updateMe({ full_name: '' });
       setDone(true);
       // Reload after a moment so auth context re-checks
       setTimeout(() => window.location.reload(), 1500);
-    } catch (e) {
-      // The user is already logged in — just update their role via updateMe
-      try {
-        await base44.auth.updateMe({ role: 'participant' });
-        setDone(true);
-        setTimeout(() => window.location.reload(), 1500);
-      } catch (e2) {
-        setError('Unable to register automatically. Please contact an administrator.');
-      }
+    } catch {
+      setError('Unable to register automatically. Please contact an administrator.');
     } finally {
       setRegistering(false);
     }
