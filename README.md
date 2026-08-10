@@ -16,6 +16,7 @@ Centralized Intake & Tracking Application (CITA™) is a modern React dashboard 
 ## Why CITA™
 
 CITA™ helps teams move from disconnected updates to a clear, actionable view of participant status.
+This project was original prototyped through Base44. We suggest using a stronger platform and planning for intense data ingestion. 
 
 - Track participant lifecycle from intake through enrollment.
 - Visualize key metrics with dashboard charts and summaries.
