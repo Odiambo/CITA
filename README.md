@@ -1,6 +1,6 @@
-# CITA
+# CITA™
 
-Centralized Intake & Tracking Application (CITA) is a modern React dashboard for managing participant intake, enrollment workflow, needs assessment and follow-ups for commuity based programing. Application and referral progress is also found in one place.
+Centralized Intake & Tracking Application (CITA™) is a modern React dashboard for managing participant intake, enrollment workflow, needs assessment and follow-ups for commuity based programing. App[...]
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)](https://react.dev)
@@ -13,9 +13,10 @@ Centralized Intake & Tracking Application (CITA) is a modern React dashboard for
 [![Issues](https://img.shields.io/github/issues/YOUR_GITHUB_USERNAME/CITA)](https://github.com/YOUR_GITHUB_USERNAME/CITA/issues)
 [![Last Commit](https://img.shields.io/github/last-commit/YOUR_GITHUB_USERNAME/CITA)](https://github.com/YOUR_GITHUB_USERNAME/CITA/commits/main)
 
-## Why CITA
+## Why CITA™
 
-CITA helps teams move from disconnected updates to a clear, actionable view of participant status.
+CITA™ helps teams move from disconnected updates to a clear, actionable view of participant status.
+This project was original prototyped through Base44. We suggest using a stronger platform and planning for intense data ingestion. 
 
 - Track participant lifecycle from intake through enrollment.
 - Visualize key metrics with dashboard charts and summaries.
@@ -137,4 +138,3 @@ npm run typecheck  # Type-check via jsconfig/tsc
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
