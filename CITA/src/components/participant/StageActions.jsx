@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { base44 } from '@/api/base44Client';
+import { cita } from '@/api/citaClient';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -11,6 +11,7 @@ import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner';
 import { ArrowRight, Save } from 'lucide-react';
 import { notifyParticipantStageChange, notifyParticipantDecision, notifyCaseworkerAssignment } from '@/lib/notifications';
+import { canEditOperationalRecords } from '@/lib/roles';
 
 const STAGES = ['initial_inquiry', 'screening', 'full_application', 'assessment', 'approval_denial', 'enrollment'];
 
@@ -20,12 +21,12 @@ export default function StageActions({ participant, userRole }) {
   const p = participant;
   const currentIdx = STAGES.indexOf(p.stage);
   const canAdvance = currentIdx < STAGES.length - 1;
-  const canEdit = ['intake_admin', 'program_director', 'exec_director', 'caseworker'].includes(userRole);
+  const canEdit = canEditOperationalRecords(userRole);
 
   const set = (field, value) => setUpdates(prev => ({ ...prev, [field]: value }));
 
   const mutation = useMutation({
-    mutationFn: (data) => base44.entities.Participant.update(p.id, data),
+    mutationFn: (data) => cita.participants.update(p.id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['participant', p.id] });
       queryClient.invalidateQueries({ queryKey: ['participants'] });

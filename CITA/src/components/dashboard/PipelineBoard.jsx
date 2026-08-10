@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Card } from '@/components/ui/card';
 import { STAGE_CONFIG } from '../shared/StageBadge';
 import StatusBadge from '../shared/StatusBadge';
@@ -38,7 +38,7 @@ export default function PipelineBoard({ participants }) {
           </div>
           <div className="space-y-2 max-h-[420px] overflow-y-auto pr-1">
             {grouped[stage].map(p => (
-              <Link key={p.id} to={`/participants/${p.id}`}>
+              <Link key={p.id} href={`/participants/${p.id}`}>
                 <Card className="p-3 border-0 shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
                   <p className="text-sm font-medium group-hover:text-primary transition-colors">
                     {p.first_name} {p.last_name}

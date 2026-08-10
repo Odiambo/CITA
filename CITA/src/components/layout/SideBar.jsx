@@ -1,37 +1,35 @@
+'use client';
+
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard, Users, UserPlus, ClipboardList,
   LogOut, ChevronLeft, ChevronRight, Shield, X, ScrollText, FileText, Calendar
 } from 'lucide-react';
-import { base44 } from '@/api/citaClient';
+import { cita } from '@/api/citaClient';
 import { cn } from '@/lib/utils';
-
-const ADMIN_ROLES = ['intake_admin', 'program_director', 'exec_director'];
+import { ROLE_GROUPS, ROLE_LABELS, ROLES } from '@/lib/roles';
 
 const NAV_ITEMS = [
-  { path: '/', icon: LayoutDashboard, label: 'Dashboard', roles: [...ADMIN_ROLES, 'exec_director', 'viewer'] },
-  { path: '/participants', icon: Users, label: 'Participants', roles: [...ADMIN_ROLES, 'program_educator', 'viewer'] },
-  { path: '/intake/new', icon: UserPlus, label: 'New Intake', roles: [...ADMIN_ROLES, 'program_educator', 'intake_admin'] },
-  { path: '/user-logs', icon: ScrollText, label: 'User Logs', roles: ['exec_director'] },
-  { path: '/my-application', icon: FileText, label: 'Intake Information', roles: ['participant'] },
-  { path: '/my-application/full', icon: ClipboardList, label: 'Application', roles: ['participant'] },
-  { path: '/my-application/calendar', icon: Calendar, label: 'Calendar', roles: ['participant'] },
+  { path: '/', icon: LayoutDashboard, label: 'Dashboard', roles: ROLE_GROUPS.dashboardViewers },
+  {
+    path: '/participants',
+    icon: Users,
+    label: 'Participants',
+    roles: [...ROLE_GROUPS.operationalEditors, ROLES.EXEC_DIRECTOR, ROLES.DATA_OFFICER, ROLES.VIEWER],
+  },
+  { path: '/intake/new', icon: UserPlus, label: 'New Intake', roles: ROLE_GROUPS.operationalEditors },
+  { path: '/user-logs', icon: ScrollText, label: 'User Logs', roles: [ROLES.EXEC_DIRECTOR, ROLES.ADMIN] },
+  { path: '/my-application', icon: FileText, label: 'Intake Information', roles: [ROLES.PARTICIPANT] },
+  { path: '/my-application/full', icon: ClipboardList, label: 'Application', roles: [ROLES.PARTICIPANT] },
+  { path: '/my-application/calendar', icon: Calendar, label: 'Calendar', roles: [ROLES.PARTICIPANT] },
 ];
 
 export default function Sidebar({ user, collapsed, onToggle, mobileOpen, onMobileClose }) {
-  const location = useLocation();
+  const pathname = usePathname();
   const userRole = user?.role || 'participant';
   const filteredNav = NAV_ITEMS.filter(item => item.roles.includes(userRole));
-
-  const roleLabels = {
-    participant: 'Participant',
-    intake_admin: 'Intake Admin',
-    program_coordinator: 'Program Coordinator',
-    exec_director: 'Exec. Director',
-    program_educator: 'Program Educator',
-    viewer: 'Viewer (Read-Only)',
-  };
 
   const handleNavClick = () => {
     if (onMobileClose) onMobileClose();
@@ -69,12 +67,12 @@ export default function Sidebar({ user, collapsed, onToggle, mobileOpen, onMobil
       {/* Nav */}
       <nav className="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
         {filteredNav.map(item => {
-          const isActive = location.pathname === item.path ||
-            (item.path !== '/' && location.pathname.startsWith(item.path));
+          const isActive = pathname === item.path ||
+            (item.path !== '/' && pathname.startsWith(item.path));
           return (
             <Link
               key={item.path}
-              to={item.path}
+              href={item.path}
               onClick={handleNavClick}
               className={cn(
                 "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all",
@@ -96,12 +94,12 @@ export default function Sidebar({ user, collapsed, onToggle, mobileOpen, onMobil
           <div className="px-3 py-2">
             <p className="text-xs font-medium truncate">{user?.full_name || user?.email}</p>
             <p className="text-[10px] text-sidebar-foreground/50 uppercase tracking-wider mt-0.5">
-              {roleLabels[userRole]}
+              {ROLE_LABELS[userRole] || userRole}
             </p>
           </div>
         )}
         <button
-          onClick={() => base44.auth.logout()}
+          onClick={() => cita.auth.logout()}
           className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-sidebar-foreground/60 hover:bg-sidebar-accent hover:text-sidebar-foreground w-full transition-all"
         >
           <LogOut className="w-[18px] h-[18px] shrink-0" />

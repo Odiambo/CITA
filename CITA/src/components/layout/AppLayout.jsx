@@ -1,17 +1,24 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
-import { base44 } from '@/api/citaClient';
+import { cita } from '@/api/citaClient';
+import { useAuth } from '@/lib/AuthContext';
 import Sidebar from './Sidebar';
 import { cn } from '@/lib/utils';
 
-export default function AppLayout() {
-  const [user, setUser] = useState(null);
+export default function AppLayout({ children }) {
+  const { user: authUser, isLoadingAuth, authError, navigateToLogin } = useAuth();
+  const [user, setUser] = useState(authUser);
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    base44.auth.me().then(setUser).catch(() => {});
-  }, []);
+    if (authUser) {
+      setUser(authUser);
+      return;
+    }
+    cita.auth.me().then(setUser).catch(() => {});
+  }, [authUser]);
 
   // Close mobile menu on resize to desktop
   useEffect(() => {
@@ -21,6 +28,19 @@ export default function AppLayout() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  if (isLoadingAuth) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (authError?.type === 'auth_required') {
+    navigateToLogin();
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -60,7 +80,7 @@ export default function AppLayout() {
         </div>
 
         <div className="p-4 sm:p-6 lg:p-8 max-w-[1440px]">
-          <Outlet context={{ user }} />
+          {children}
         </div>
       </main>
     </div>);
