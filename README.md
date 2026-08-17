@@ -8,10 +8,10 @@ Centralized Intake & Tracking Application (CITA™) is a modern React dashboard 
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 
 <!-- GitHub badges: replace YOUR_GITHUB_USERNAME and CITA with your actual repo path -->
-[![Stars](https://img.shields.io/github/stars/YOUR_GITHUB_USERNAME/CITA?style=social)](https://github.com/YOUR_GITHUB_USERNAME/CITA/stargazers)
-[![Forks](https://img.shields.io/github/forks/YOUR_GITHUB_USERNAME/CITA?style=social)](https://github.com/YOUR_GITHUB_USERNAME/CITA/network/members)
-[![Issues](https://img.shields.io/github/issues/YOUR_GITHUB_USERNAME/CITA)](https://github.com/odiambo/CITA/issues)
-[![Last Commit](https://img.shields.io/github/last-commit/YOUR_GITHUB_USERNAME/CITA)](https://github.com/odiambo/CITA/commits/main)
+[![Stars](https://img.shields.io/github/stars/Odiambo/CITA?style=social)](https://github.com/Odiambo/CITA/stargazers)
+[![Forks](https://img.shields.io/github/forks/Odiambo/CITA?style=social)](https://github.com/Odiambo/CITA/network/members)
+[![Issues](https://img.shields.io/github/issues/Odiambo/CITA)](https://github.com/Odiambo/CITA/issues)
+[![Last Commit](https://img.shields.io/github/last-commit/Odiambo/CITA)](https://github.com/Odiambo/CITA/commits/main)
 
 ## Why CITA™
 
