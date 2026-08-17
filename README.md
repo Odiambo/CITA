@@ -7,7 +7,7 @@ Centralized Intake & Tracking Application (CITA™) is a modern React dashboard 
 [![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 
-<!-- GitHub badges: replace YOUR_GITHUB_USERNAME and CITA with your actual repo path -->
+
 [![Stars](https://img.shields.io/github/stars/Odiambo/CITA?style=social)](https://github.com/Odiambo/CITA/stargazers)
 [![Forks](https://img.shields.io/github/forks/Odiambo/CITA?style=social)](https://github.com/Odiambo/CITA/network/members)
 [![Issues](https://img.shields.io/github/issues/Odiambo/CITA)](https://github.com/Odiambo/CITA/issues)
