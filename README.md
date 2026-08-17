@@ -10,8 +10,8 @@ Centralized Intake & Tracking Application (CITA™) is a modern React dashboard 
 <!-- GitHub badges: replace YOUR_GITHUB_USERNAME and CITA with your actual repo path -->
 [![Stars](https://img.shields.io/github/stars/YOUR_GITHUB_USERNAME/CITA?style=social)](https://github.com/YOUR_GITHUB_USERNAME/CITA/stargazers)
 [![Forks](https://img.shields.io/github/forks/YOUR_GITHUB_USERNAME/CITA?style=social)](https://github.com/YOUR_GITHUB_USERNAME/CITA/network/members)
-[![Issues](https://img.shields.io/github/issues/YOUR_GITHUB_USERNAME/CITA)](https://github.com/YOUR_GITHUB_USERNAME/CITA/issues)
-[![Last Commit](https://img.shields.io/github/last-commit/YOUR_GITHUB_USERNAME/CITA)](https://github.com/YOUR_GITHUB_USERNAME/CITA/commits/main)
+[![Issues](https://img.shields.io/github/issues/YOUR_GITHUB_USERNAME/CITA)](https://github.com/odiambo/CITA/issues)
+[![Last Commit](https://img.shields.io/github/last-commit/YOUR_GITHUB_USERNAME/CITA)](https://github.com/odiambo/CITA/commits/main)
 
 ## Why CITA™
 
